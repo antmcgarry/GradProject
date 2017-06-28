@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114853187865931360}
   - component: {fileID: 153270060554541512}
   - component: {fileID: 114271336293300688}
+  - component: {fileID: 114825674659905222}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -618,7 +619,7 @@ MonoBehaviour:
   cam: {fileID: 20657094733507618}
   mask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967039
 --- !u!114 &114288693723294312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -681,6 +682,21 @@ MonoBehaviour:
   jointMode: 1
   jointSpring: 20
   jointMaxForce: 40
+--- !u!114 &114825674659905222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050814941073798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0208d3e314f1ea448ac3cbd20ef2000d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  disableOnDeath:
+  - {fileID: 114573285765450718}
+  - {fileID: 114271336293300688}
 --- !u!114 &114853187865931360
 MonoBehaviour:
   m_ObjectHideFlags: 1

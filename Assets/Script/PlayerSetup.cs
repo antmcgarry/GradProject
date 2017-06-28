@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+
+
+[RequireComponent(typeof(Player))]//Requires the Player Script on the Object
 public class PlayerSetup : NetworkBehaviour {
     [SerializeField]
     Behaviour[] componentsToDisable;
@@ -27,16 +30,18 @@ public class PlayerSetup : NetworkBehaviour {
             }
         }
 
-        RegisterPlayer();
-
+        GetComponent<Player>().Setup();
 
     }
 
-
-    void RegisterPlayer()
+    public override void OnStartClient()//runs every time the client is started localy
     {
-        string _ID = "Player" + GetComponent<NetworkIdentity>().netId;
-        transform.name = _ID;
+        base.OnStartClient();
+        string _netID = GetComponent<NetworkIdentity>().netId.ToString();
+        Player _player = GetComponent<Player>();
+
+
+        GameManager.RegisterPlayer(_netID, _player);
     }
 
     void AssignRemoteLayer()
@@ -52,12 +57,17 @@ public class PlayerSetup : NetworkBehaviour {
         }
     }
 
+
+    //when we are destroyed
     private void OnDisable()
     {
+        // Re-enable the scene camera
         if(sceneCamera != null)
         {
             sceneCamera.gameObject.SetActive(true);
         }
+
+        GameManager.UnRegisterPlayer(transform.name);
     }
 
 }
